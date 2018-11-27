@@ -1,5 +1,5 @@
 //aaa
-/shalom
+//shalom
 import java.util.HashMap;
 import java.util.Scanner;
 

@@ -1,14 +1,7 @@
-//edit
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class homework1 {
-
-            /*
-            * Hints in doing the HW:
-            *   a) Make sure you first understand what you are doing.
-            *   b) Watch Lecture 2 focusing on the code described
-            */
                         
             static int ADR =5;
             static int LAB =0;

@@ -1,6 +1,6 @@
 //aaa
-//reeeeeeeeeeeeee
 //shalom
+//seva
 import java.util.HashMap;
 import java.util.Scanner;
 

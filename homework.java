@@ -68,8 +68,9 @@ public class homework1 {
 
                     if(tree.value.equals("program")) {
 
-                        if(tree.right != null){
-                            generateSymbolTable(tree.right);
+                    	tree = tree.right;
+                        if(tree != null){
+                            generateSymbolTable(tree);
                             return null;
                         }
                         else
@@ -78,8 +79,9 @@ public class homework1 {
 
                     if(tree.value.equals("content")) {
 
-                        if(tree.left != null){
-                            generateSymbolTable(tree.left);
+                    	tree = tree.left;
+                        if(tree != null){
+                            generateSymbolTable(tree);
                             return null;
                         }
 
@@ -399,5 +401,3 @@ public class homework1 {
             }
 
     }
-
-

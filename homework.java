@@ -61,53 +61,46 @@ public class homework1 {
                 }
                 
                 public static SymbolTable generateSymbolTable(AST tree){
-
-                    if(tree == null) {
-                        return null;
+                		
+                	SymbolTable st = new SymbolTable();
+                	AST treeTemp = tree;	
+                	coded(treeTemp, st);
+                	return st;
+                }
+                
+                public static void coded(AST tree, SymbolTable symbolTable){
+                    
+                	
+                	if(tree == null) {
+                        return;
                     }
 
+                    
+  
                     if(tree.value.equals("program")) {
 
-                    	tree = tree.right;
-                        if(tree != null){
-                            generateSymbolTable(tree);
-                            return null;
-                        }
-                        else
-                            return null;
+                    	coded(tree.right, symbolTable);
+                    	
                     }
 
                     if(tree.value.equals("content")) {
 
-                    	tree = tree.left;
-                        if(tree != null){
-                            generateSymbolTable(tree);
-                            return null;
-                        }
-
+                    	coded(tree.left, symbolTable);
+                    	
                     }
 
                     if(tree.value.equals("scope")) {
 
-                    	tree = tree.left;
-                        if(tree != null){
-                            generateSymbolTable(tree);
-                            return null;
-                        }
-
+                    	coded(tree.left, symbolTable);
                     }
 
                     if(tree.value.equals("declarationsList")) {
-
-                        if(tree.left != null) {
-                            generateSymbolTable(tree.left);
-                        }
-
-                        else if(tree.right != null){
-                            generateSymbolTable(tree.right);
-                        }
-                        else
-                            return null;
+                    	
+                    	if(tree.left != null)
+                    		coded(tree.left, symbolTable);
+                    	
+                    	if(tree.right != null)
+                    		coded(tree.right, symbolTable);
                     }
 
                     if(tree.value.equals("var")) {
@@ -117,10 +110,12 @@ public class homework1 {
 
                     }
 
-                    return null;
+                  return;
 
                 }
-            }
+                	
+                	
+             }
 
             private static void generatePCode(AST ast, SymbolTable symbolTable) {
 
@@ -401,3 +396,4 @@ public class homework1 {
             }
 
     }
+

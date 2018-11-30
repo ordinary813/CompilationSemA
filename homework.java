@@ -163,6 +163,8 @@ public class homework1 {
                     
                     code(tree.right,symbolTable);
                     System.out.println("L" + localWanted + ":");
+                        
+                    return;
 
                 }
 

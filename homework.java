@@ -103,18 +103,15 @@ public class homework{
                     }
 
                     if(tree.value.equals("var")) {
+
+                        Variable variable = new Variable(getType(tree),ADDRESS);                        	//creating a new variable with the string getPointerType(tree), and gets assigned an address
+                        myHashtable.put(tree.left.left.value,variable);                                 	//new entry in the hashtable, name of the variable , and it's values
+                        int toAdd = 1;
                         
-                        if(tree.right.value.equals("array")){
-                            int toAdd = getTotalRange(tree.right);                                          //this will count the amount of cells we need to allocate
-                            Variable variable = new Variable(getType(tree),ADDRESS);
-                            myHashtable.put(tree.left.left.value,variable);
-                            ADDRESS = ADDRESS + toAdd;                                                      //increasing the size of static ADDRESS
-                        }
-                        else{
-                            Variable variable = new Variable(getType(tree),ADDRESS);                        //creating a new variable with the string getPointerType(tree), and gets assigned an address
-                            myHashtable.put(tree.left.left.value,variable);                                 //new entry in the hashtable, name of the variable , and it's values
-                            ADDRESS++;
-                        }
+                        if(tree.right.value.equals("array"))
+                        	toAdd = getTotalRange(tree.right);                                         		//this will count the amount of cells we need to allocate
+
+                        ADDRESS = ADDRESS + toAdd;                                                      	//increasing the size of static ADDRESS
                     }
                   return;	
              }

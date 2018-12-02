@@ -45,7 +45,6 @@ public class homework{
 
                 }
 
-
             }
 
             static final class SymbolTable{
@@ -105,9 +104,17 @@ public class homework{
 
                     if(tree.value.equals("var")) {
                         
-                        Variable variable = new Variable(getType(tree),ADDRESS);                        //creating a new variable with the string getPointerType(tree), and gets assigned an address
-                       	myHashtable.put(tree.left.left.value,variable);                                 //new entry in the hashtable, name of the variable , and it's values
-                       	ADDRESS++;
+                        if(tree.right.value.equals("array")){
+                            int toAdd = getTotalRange(tree.right);                                          //this will count the amount of cells we need to allocate
+                            Variable variable = new Variable(getType(tree),ADDRESS);
+                            myHashtable.put(tree.left.left.value,variable);
+                            ADDRESS = ADDRESS + toAdd;                                                      //increasing the size of static ADDRESS
+                        }
+                        else{
+                            Variable variable = new Variable(getType(tree),ADDRESS);                        //creating a new variable with the string getPointerType(tree), and gets assigned an address
+                            myHashtable.put(tree.left.left.value,variable);                                 //new entry in the hashtable, name of the variable , and it's values
+                            ADDRESS++;
+                        }
                     }
                   return;	
              }
@@ -117,15 +124,23 @@ public class homework{
             {
             	if(tree == null)
             		return "";
-
             	else if(tree.left.value.equals("pointer"))
             		return tree.value + " " +getPointerType(tree.left);
-
             	else if(tree.left.value.equals("identifier"))
             		return myHashtable.get((tree.left.value).type) + " " +getPointerType(tree.left);
-
             	else
             		return myHashtable.get((tree.left.value).type);
+            }
+
+            private static int getTotalRange(AST tree)                                                      //this function returns the total amount of memory slots needed for the array
+            {
+                if(tree == null)
+                    return;
+
+                if(tree.right.equals("range"))
+                    return Integer.parseInt(tree.right.left.value) - Integer.parseInt(tree.left.left.value);
+
+                return getTotalRange(tree.left) + getTotalRange(tree.right);
             }
 
             private static void generatePCode(AST ast, SymbolTable symbolTable) {

@@ -104,8 +104,8 @@ public class homework{
                     }
 
                     if(tree.value.equals("var")) {
-
-                        Variable variable = new Variable(getPointerType(tree),ADDRESS);                 //creating a new variable with the string getPointerType(tree), and gets assigned an address
+                        
+                        Variable variable = new Variable(getType(tree),ADDRESS);                        //creating a new variable with the string getPointerType(tree), and gets assigned an address
                        	myHashtable.put(tree.left.left.value,variable);                                 //new entry in the hashtable, name of the variable , and it's values
                        	ADDRESS++;
                     }
@@ -113,7 +113,7 @@ public class homework{
              }
 
 
-            private static String getPointerType(AST tree)
+            private static String getType(AST tree)
             {
             	if(tree == null)
             		return "";

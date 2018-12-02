@@ -105,15 +105,11 @@ public class homework{
 
                     if(tree.value.equals("var")) {
 
-                        Variable variable = new Variable(getPointerType(tree),ADDRESS);
-                       	myHashtable.put(tree.left.left.value,variable);
+                        Variable variable = new Variable(getPointerType(tree),ADDRESS);                 //creating a new variable with the string getPointerType(tree), and gets assigned an address
+                       	myHashtable.put(tree.left.left.value,variable);                                 //new entry in the hashtable, name of the variable , and it's values
                        	ADDRESS++;
                     }
-                  return;
-
-                
-                	
-                	
+                  return;	
              }
 
 
@@ -130,8 +126,6 @@ public class homework{
 
             	else
             		return myHashtable.get((tree.left.value).type);
-
-            	
             }
 
             private static void generatePCode(AST ast, SymbolTable symbolTable) {

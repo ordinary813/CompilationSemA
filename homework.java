@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class homework1 {
+public class homework{
 
 
         static int ADDRESS = 5; 
@@ -104,18 +104,35 @@ public class homework1 {
                     }
 
                     if(tree.value.equals("var")) {
-                        Variable variable = new Variable(tree.right.value,ADDRESS);
-                        myHashtable.put(tree.left.left.value,variable);
-                        ADDRESS++;
 
+                        Variable variable = new Variable(getPointerType(tree),ADDRESS);
+                       	myHashtable.put(tree.left.left.value,variable);
+                       	ADDRESS++;
                     }
-
                   return;
 
-                }
+                
                 	
                 	
              }
+
+
+            private static String getPointerType(AST tree)
+            {
+            	if(tree == null)
+            		return "";
+
+            	else if(tree.left.value.equals("pointer"))
+            		return tree.value + " " +getPointerType(tree.left);
+
+            	else if(tree.left.value.equals("identifier"))
+            		return myHashtable.get((tree.left.value).type) + " " +getPointerType(tree.left);
+
+            	else
+            		return myHashtable.get((tree.left.value).type);
+
+            	
+            }
 
             private static void generatePCode(AST ast, SymbolTable symbolTable) {
 
@@ -376,7 +393,7 @@ public class homework1 {
 
                 if(tree.value.equals("identifier" )){
 
-                    System.out.println("ldc "+SymbolTable.myHashtable.get(tree.left.value).address);
+                    System.out.println("ldc " + SymbolTable.myHashtable.get(tree.left.value).address);
                 }
             }
 
